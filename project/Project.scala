@@ -6,7 +6,8 @@ import AssemblyKeys._
 
 object BuildSettings {
   val buildOrganization = "org.scalanlp"
-  val buildScalaVersion = "2.10.0"
+  //val buildScalaVersion = "2.10.0"
+  val buildScalaVersion = "2.9.3"
 
   val scalaVersionRegex = "(\\d+)\\.(\\d+).*".r
 
@@ -17,7 +18,7 @@ object BuildSettings {
     resolvers ++= Seq(
       "Sonatype Snapshots" at "https://oss.sonatype.org/content/repositories/snapshots/"
     ),
-    crossScalaVersions := Seq("2.9.2", "2.10.0"),
+    crossScalaVersions := Seq("2.9.3", "2.10.0"),
   publishMavenStyle := true,
   publishTo <<= version { (v: String) =>
     val nexus = "https://oss.sonatype.org/"
@@ -50,7 +51,7 @@ object BuildSettings {
     </developers>),
   scalacOptions <++= (scalaVersion).map { (sv) =>
      sv.toString match {
-       case "2.9.2" | "2.9.1" => 
+       case "2.9.2" | "2.9.1" | "2.9.3"  => 
      println(sv)
        Seq("-no-specialization","-optimize","-deprecation", "-Ydependent-method-types")
       case _ => Seq("-no-specialization","-optimize","-deprecation")
