@@ -20,13 +20,17 @@ object BuildSettings {
     ),
     crossScalaVersions := Seq("2.9.3", "2.10.0"),
   publishMavenStyle := true,
-  publishTo <<= version { (v: String) =>
-    val nexus = "https://oss.sonatype.org/"
-    if (v.trim.endsWith("SNAPSHOT")) 
-      Some("snapshots" at nexus + "content/repositories/snapshots") 
-    else
-      Some("releases"  at nexus + "service/local/staging/deploy/maven2")
-  },
+  //publishTo <<= version { (v: String) =>
+  //  val nexus = "https://oss.sonatype.org/"
+  //  if (v.trim.endsWith("SNAPSHOT")) 
+  //    Some("snapshots" at nexus + "content/repositories/snapshots") 
+  //  else
+  //    Some("releases"  at nexus + "service/local/staging/deploy/maven2")
+  //},
+
+  publishTo := Some(Resolver.file("file",  new File(Path.userHome.absolutePath+"/.m2/repository"))),
+
+
   publishArtifact in Test := false,
   pomIncludeRepository := { _ => false },
   pomExtra := (
